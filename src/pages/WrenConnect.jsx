@@ -2,7 +2,7 @@
 import React from "react";
 import GroupsList from "../components/GroupList";
 import Searchbar from "../components/Searchbar";
-import NorthLarkAdmins from "../components/NorthLarkAdmins";
+import NorthLarkAdmins from "../components/AdminList";
 import Chat from "../components/Chat";
 import NewChatButtion from "../components/NewChatButtion";
 
