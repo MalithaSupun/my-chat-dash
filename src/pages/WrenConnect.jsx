@@ -1,8 +1,8 @@
 // WrenConnect.jsx
 import React from "react";
-import GroupsList from "../components/GroupList";
+
 import Searchbar from "../components/Searchbar";
-import NorthLarkAdmins from "../components/AdminList";
+import AdminList from "../components/AdminList";
 import Chat from "../components/Chat";
 import NewChatButtion from "../components/NewChatButtion";
 
@@ -20,10 +20,8 @@ function WrenConnect() {
           </div>
         </div>
 
-        <div className="mt-5 mb-2">
-          <GroupsList />
-        </div>
-        <NorthLarkAdmins />
+
+        <AdminList />
       </div>
 
       <div className="w-4/5 flex-1 h-full px-9 bg-white">
