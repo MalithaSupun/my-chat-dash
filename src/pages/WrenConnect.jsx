@@ -1,4 +1,3 @@
-// WrenConnect.jsx
 import React from "react";
 
 import Searchbar from "../components/Searchbar";
@@ -19,8 +18,6 @@ function WrenConnect() {
             <NewChatButtion />
           </div>
         </div>
-
-
         <AdminList />
       </div>
 

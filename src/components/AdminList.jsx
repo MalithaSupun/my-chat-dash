@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { groups } from "../constants/groupsData"; // Your groups data
 import { users } from "../constants/usersData";  // Your users (Analysts) data
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, isActive, onClick }) => {
   return (
-    <div className="flex items-center justify-between p-4 border-b">
+    <div
+      onClick={onClick}
+      className={`flex items-center justify-between p-4 border-b cursor-pointer ${
+        isActive ? "bg-blue-100" : ""
+      }`}
+    >
       <div className="flex items-center space-x-4">
         {/* Item image (either group or user) */}
         <img src={item.img} alt={item.name} className="w-10 h-10 rounded-full" />
@@ -33,6 +38,19 @@ const ListItem = ({ item }) => {
 };
 
 const CombinedList = () => {
+  const [activeId, setActiveId] = useState(null);
+  const [activeType, setActiveType] = useState(null); // 'group' or 'user'
+
+  const handleGroupClick = (groupId) => {
+    setActiveId(groupId);
+    setActiveType('group');
+  };
+
+  const handleUserClick = (userId) => {
+    setActiveId(userId);
+    setActiveType('user');
+  };
+
   return (
     <>
       {/* Section for Groups */}
@@ -40,7 +58,12 @@ const CombinedList = () => {
         <h2 className="text-lg font-bold pb-4">Groups</h2>
         <div>
           {groups.map((group) => (
-            <ListItem key={group.id} item={group} />
+            <ListItem
+              key={group.groupId}
+              item={group}
+              isActive={activeType === 'group' && activeId === group.groupId}
+              onClick={() => handleGroupClick(group.groupId)}
+            />
           ))}
         </div>
       </div>
@@ -49,7 +72,12 @@ const CombinedList = () => {
         <h2 className="text-lg font-bold pb-4">Analysts</h2>
         <div>
           {users.map((user) => (
-            <ListItem key={user.id} item={user} />
+            <ListItem
+              key={user.userId}
+              item={user}
+              isActive={activeType === 'user' && activeId === user.userId}
+              onClick={() => handleUserClick(user.userId)}
+            />
           ))}
         </div>
       </div>

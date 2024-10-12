@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip, faSmile, faCamera, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { chatData } from "../constants/chatdata"; // Import chat data
 
+
 // Chat bubble component
 const ChatBubble = ({ message, isSender, time }) => {
   return (
