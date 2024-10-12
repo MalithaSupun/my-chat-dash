@@ -5,7 +5,7 @@ export const groups = [
       message: "Yesss",
       time: "Today, 9:52pm",
       notification: 4,
-      img: "https://via.placeholder.com/150", // Replace with your image link
+      img: "https://picsum.photos/150/150?random=1", // Replace with your image link
     },
     {
       id: 2,
@@ -13,7 +13,7 @@ export const groups = [
       message: "I dont think we can",
       time: "Yesterday, 12:31pm",
       notification: 0,
-      img: "https://via.placeholder.com/150", // Replace with your image link
+      img: "https://picsum.photos/150/150?random=2", // Replace with your image link
     },
     {
       id: 3,
@@ -21,7 +21,7 @@ export const groups = [
       message: "We are planning this friday",
       time: "Wednesday, 9:12am",
       notification: 0,
-      img: "https://via.placeholder.com/150", // Replace with your image link
+      img: "https://picsum.photos/150/150?random=3", // Replace with your image link
     },
   ];
   

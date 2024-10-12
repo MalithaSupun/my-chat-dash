@@ -77,13 +77,8 @@ const Chat = () => {
           />
 
           {/* Emoji icon */}
-          <button className="absolute right-16 text-gray-500">
-            <FontAwesomeIcon icon={faSmile} />
-          </button>
-
-          {/* Camera icon */}
           <button className="absolute right-10 text-gray-500">
-            <FontAwesomeIcon icon={faCamera} />
+            <FontAwesomeIcon icon={faSmile} />
           </button>
 
           {/* Send button */}

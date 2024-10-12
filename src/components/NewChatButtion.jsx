@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaPlus, FaTimes, FaPaperPlane } from 'react-icons/fa';
-import { users } from '../constants/usersData'; // Import the users data
+import { users } from '../constants/usersData';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NewChatModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +40,7 @@ const NewChatModal = () => {
 
   // Function to handle sending a message to a user
   const handleSendMessage = (user) => {
-    alert(`Start chat with ${user.name}`); // This can be customized as needed
+    toast.success(`Start chat with ${user.name}`); 
   };
 
   // Function to handle proceeding to group form after selecting users
@@ -49,12 +51,12 @@ const NewChatModal = () => {
   // Function to handle final group creation
   const finalizeGroupCreation = () => {
     if (groupName.trim() === '') {
-      alert('Please enter a group name');
+        toast.error('Please enter a group name');
       return;
     }
 
     const groupMembers = users.filter((user) => selectedUsers.includes(user.id));
-    alert(`Group "${groupName}" created with: ${groupMembers.map((user) => user.name).join(', ')}`);
+    toast.success(`Group "${groupName}" created with: ${groupMembers.map((user) => user.name).join(', ')}`);
     toggleModal(); // Close modal after creating the group
   };
 
@@ -81,7 +83,7 @@ const NewChatModal = () => {
       // You can add logic here to save the contact information
       toggleModal(); // Close the modal after adding the contact
     } else {
-      alert('Please fill in all the fields');
+        toast.error('Please fill in all the fields');
     }
   };
 
@@ -110,69 +112,8 @@ const NewChatModal = () => {
               </button>
             </div>
 
-            {/* New Contact Form */}
-            {isContactFormVisible ? (
-              <>
-                {/* First Name Input */}
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    className="w-full p-2 border rounded-lg"
-                    name="firstName"
-                    value={newContact.firstName}
-                    onChange={handleContactInputChange} // Update first name
-                  />
-                </div>
-
-                {/* Last Name Input */}
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    className="w-full p-2 border rounded-lg"
-                    name="lastName"
-                    value={newContact.lastName}
-                    onChange={handleContactInputChange} // Update last name
-                  />
-                </div>
-
-                {/* Country Input */}
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="Country"
-                    className="w-full p-2 border rounded-lg"
-                    name="country"
-                    value={newContact.country}
-                    onChange={handleContactInputChange} // Update country
-                  />
-                </div>
-
-                {/* Mobile Number Input */}
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="Mobile Number"
-                    className="w-full p-2 border rounded-lg"
-                    name="mobile"
-                    value={newContact.mobile}
-                    onChange={handleContactInputChange} // Update mobile number
-                  />
-                </div>
-
-                {/* Done Button */}
-                <div className="flex justify-end mt-4">
-                  <button
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                    onClick={handleAddContact} // Add contact on click
-                  >
-                    Done
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
+           
+              
                 {/* Search Input */}
                 <div className="mb-4">
                   <input
@@ -180,7 +121,7 @@ const NewChatModal = () => {
                     placeholder="Search users..."
                     className="w-full p-2 border rounded-lg"
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+                    onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
 
@@ -192,12 +133,6 @@ const NewChatModal = () => {
                       onClick={() => setIsGroupMode(true)} // Activate group mode
                     >
                       New Group
-                    </button>
-                    <button
-                      className="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                      onClick={() => setIsContactFormVisible(true)} // Show new contact form
-                    >
-                      New Contact
                     </button>
                   </div>
                 )}
@@ -287,11 +222,10 @@ const NewChatModal = () => {
                     </div>
                   </div>
                 )}
-              </>
-            )}
           </div>
         </div>
       )}
+      <ToastContainer />
     </>
   );
 };
