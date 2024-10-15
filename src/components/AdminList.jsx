@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { groups } from "../constants/groupsData"; // Your groups data
-import { users } from "../constants/usersData";  // Your users (Analysts) data
+import { useState } from "react";
+import { users, groups } from "../constants/usersData"; // Your users (Analysts) data
 
 const ListItem = ({ item, isActive, onClick }) => {
   return (
@@ -12,7 +11,11 @@ const ListItem = ({ item, isActive, onClick }) => {
     >
       <div className="flex items-center space-x-4">
         {/* Item image (either group or user) */}
-        <img src={item.img} alt={item.name} className="w-10 h-10 rounded-full" />
+        <img
+          src={item.img}
+          alt={item.name}
+          className="w-10 h-10 rounded-full"
+        />
         <div>
           {/* Item name and last message */}
           <p className="font-bold">{item.name}</p>
@@ -37,18 +40,25 @@ const ListItem = ({ item, isActive, onClick }) => {
   );
 };
 
-const CombinedList = () => {
-  const [activeId, setActiveId] = useState(null);
-  const [activeType, setActiveType] = useState(null); // 'group' or 'user'
-
+const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
   const handleGroupClick = (groupId) => {
     setActiveId(groupId);
-    setActiveType('group');
+    setActiveType("group");
+    // Clear notification for the selected group
+    const groupIndex = groups.findIndex((group) => group.groupId === groupId);
+    if (groupIndex !== -1) {
+      groups[groupIndex].notification = 0;
+    }
   };
 
   const handleUserClick = (userId) => {
     setActiveId(userId);
-    setActiveType('user');
+    setActiveType("user");
+    // Clear notification for the selected user
+    const userIndex = users.findIndex((user) => user.userId === userId);
+    if (userIndex !== -1) {
+      users[userIndex].notification = 0;
+    }
   };
 
   return (
@@ -61,7 +71,7 @@ const CombinedList = () => {
             <ListItem
               key={group.groupId}
               item={group}
-              isActive={activeType === 'group' && activeId === group.groupId}
+              isActive={activeType === "group" && activeId === group.groupId}
               onClick={() => handleGroupClick(group.groupId)}
             />
           ))}
@@ -75,7 +85,7 @@ const CombinedList = () => {
             <ListItem
               key={user.userId}
               item={user}
-              isActive={activeType === 'user' && activeId === user.userId}
+              isActive={activeType === "user" && activeId === user.userId}
               onClick={() => handleUserClick(user.userId)}
             />
           ))}
@@ -85,4 +95,5 @@ const CombinedList = () => {
   );
 };
 
-export default CombinedList;
+
+export default AdminList;

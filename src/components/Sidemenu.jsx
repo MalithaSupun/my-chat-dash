@@ -20,7 +20,7 @@ const Sidemenu = () => {
               className={({ isActive }) =>
                 isActive
                   ? "flex items-center bg-gray-200 cursor-pointer rounded-md p-2"
-                  : "flex items-center cursor-pointer rounded-md p-2 hover:bg-orange-200"
+                  : "flex items-center cursor-pointer rounded-md p-2 hover:bg-gray-100 hover:opacity-95"
               }
             >
               <FaTasks className="mr-3" />
@@ -33,7 +33,7 @@ const Sidemenu = () => {
               className={({ isActive }) =>
                 isActive
                   ? "flex items-center bg-gray-200 cursor-pointer rounded-md p-2"
-                  : "flex items-center cursor-pointer rounded-md p-2 hover:bg-orange-200"
+                  : "flex items-center cursor-pointer rounded-md p-2 hover:bg-gray-100"
               }
             >
               <FaUsers className="mr-3" />
@@ -46,7 +46,7 @@ const Sidemenu = () => {
               className={({ isActive }) =>
                 isActive
                   ? "flex items-center bg-gray-200 cursor-pointer rounded-md p-2"
-                  : "flex items-center cursor-pointer rounded-md p-2 hover:bg-orange-200"
+                  : "flex items-center cursor-pointer rounded-md p-2 hover:bg-gray-100"
               }
             >
               <FaComments className="mr-3" />
@@ -58,7 +58,7 @@ const Sidemenu = () => {
 
       {/* Bottom section */}
       <div className="p-4">
-        <div className="flex items-center cursor-pointer hover:bg-orange-200 rounded-md p-2">
+        <div className="flex items-center cursor-pointer hover:bg-gray-100 rounded-md p-2">
           <FaQuestionCircle className="mr-3" />
           <span>Help and Support</span>
         </div>

@@ -1,0 +1,40 @@
+/* Fade In/Out Animation for Dropdown */
+.fade-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .fade-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  /* Style for the scrollable dropdown */
+  .dropdown ul {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  /* Optional: Custom scrollbar */
+  .dropdown ul::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .dropdown ul::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 4px;
+  }
+  
+  .dropdown ul::-webkit-scrollbar-thumb:hover {
+    background-color: #888888;
+  }
+  
