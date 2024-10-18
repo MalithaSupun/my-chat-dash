@@ -162,11 +162,11 @@ const NewChatModal = () => {
                         {isGroupMode ? (
                           <input
                             type="checkbox"
-                            checked={selectedUsers.includes(user.id)}
-                            onChange={() => handleSelectUser(user.id)}
+                            checked={selectedUsers.includes(user)}
+                            onChange={() => handleSelectUser(user)}
                             />
                         ) : (
-                          <button onClick={() => handleSendMessage(user)} className="text-blue-500">
+                          <button onClick={() => handleSendMessage(user.userId)} className="text-blue-500">
                             <FaPaperPlane />
                           </button>
                         )}
@@ -216,7 +216,7 @@ const NewChatModal = () => {
                       <button
                         className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
                         onClick={finalizeGroupCreation} // Create group on click
-                      >
+                       >
                         Finalize Group
                       </button>
                     </div>

@@ -146,13 +146,13 @@ const Chat = ({ activeId, activeType }) => {
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+         <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
             {profilePic ? (
               <img
                 src={profilePic}
                 alt="Profile"
                 className="w-full h-full object-cover"
-              />
+              /> 
             ) : (
               <div className="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center">
                 <i className="fas fa-user text-gray-500"></i>
