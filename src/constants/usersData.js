@@ -6,7 +6,7 @@ export const users = [
     time: "Today, 9.52pm",
     notification: 0,
     img: "https://randomuser.me/api/portraits/men/1.jpg",
-    status: "read",
+    status: "delivered",
     chatData: [
       { id: 1, sender: "Anil", message: "Whats the status?", time: "Today, 9.52pm", isSender: false },
       { id: 2, sender: "You", message: "Working on it.", time: "Today, 9.53pm", isSender: true },
@@ -20,7 +20,7 @@ export const users = [
     time: "Today, 12.11pm",
     notification: 1,
     img: "https://randomuser.me/api/portraits/men/2.jpg",
-    status: "unread",
+    status: "read",
     chatData: [
       { id: 1, sender: "Chuuthiya", message: "Can we connect?", time: "Today, 12.11pm", isSender: false },
       { id: 2, sender: "You", message: "Sure! What time works for you?", time: "Today, 12.12pm", isSender: true },

@@ -1,7 +1,22 @@
 import { useState } from "react";
 import { users, groups } from "../constants/usersData"; // Your users (Analysts) data
+import { FaCheck, FaCheckDouble } from "react-icons/fa"; // Single and double check icons
 
 const ListItem = ({ item, isActive, onClick }) => {
+  // Helper function to render the appropriate icon based on status
+  const renderStatusIcon = (status) => {
+    switch (status) {
+      case "read":
+        return <FaCheckDouble className="text-green-500" />; // Read: green double checkmarks
+      case "delivered":
+        return <FaCheckDouble className="text-black" />; // Delivered but unread: black double checkmarks
+      case "not delivered":
+        return <FaCheck className="text-black" />; // Not delivered: single black checkmark
+      default:
+        return null; // No icon if no status
+    }
+  };
+
   return (
     <div
       onClick={onClick}
@@ -25,10 +40,8 @@ const ListItem = ({ item, isActive, onClick }) => {
       <div className="text-right">
         {/* Time */}
         <p className="text-sm text-gray-400">{item.time}</p>
-        {/* Checkmark icon if read */}
-        {item.status === "read" && (
-          <span className="text-green-500">&#10004;&#10004;</span>
-        )}
+        {/* Render status icon based on the status */}
+        {renderStatusIcon(item.status)}
         {/* Notification badge if unread messages */}
         {item.notification > 0 && (
           <span className="text-xs text-white bg-red-500 px-2 py-1 rounded-full">
@@ -94,6 +107,5 @@ const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
     </>
   );
 };
-
 
 export default AdminList;
