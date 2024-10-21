@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { users } from "../constants/usersData";
 import { FaPaperPlane } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,8 +38,8 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
 
   // Handle creating group chat
   const handleCreateGroup = () => {
-    if (groupName.trim() === "" || selectedUsers.length === 0) {
-      alert("Group name and at least one user are required!");
+    if (groupName.trim() === "" || selectedUsers.length < 3) {
+      toast.error("Group name and at least Three user are required!");
       return;
     }
     // Create group logic here (use groupName, groupPhoto, selectedUsers)
@@ -210,6 +213,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </>
   );
 };
