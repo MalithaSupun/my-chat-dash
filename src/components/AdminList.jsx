@@ -9,9 +9,8 @@ const ListItem = ({ item, isActive, onClick }) => {
       case "read":
         return <FaCheckDouble className="text-green-500" />; // Read: green double checkmarks
       case "delivered":
-        return <FaCheckDouble className="text-black" />; // Delivered but unread: black double checkmarks
-      case "unread":
-        return <FaCheckDouble className="text-black" />; // Unseen: black double checkmarks
+      case "unread": // Combine delivered and unread
+        return <FaCheckDouble className="text-black" />; // Delivered and unread: black double checkmarks
       case "not delivered":
         return <FaCheck className="text-black" />; // Not delivered: single black checkmark
       default:
