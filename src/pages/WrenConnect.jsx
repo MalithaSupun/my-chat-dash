@@ -2,7 +2,7 @@ import { useState } from "react";
 import Searchbar from "../components/Searchbar";
 import AdminList from "../components/AdminList";
 import Chat from "../components/Chat";
-import NewChatButtion from "../components/NewChatButtion";
+import NewChatButton from "../components/NewChatButtion";
 
 function WrenConnect() {
   const [activeId, setActiveId] = useState(null);
@@ -15,9 +15,13 @@ function WrenConnect() {
           <div className="flex-grow mr-5">
             <Searchbar />
           </div>
-
           <div>
-            <NewChatButtion />
+            {/* Pass activeId and setter to NewChatButton */}
+            <NewChatButton 
+              activeId={activeId}
+              setActiveId={setActiveId}
+              setActiveType={setActiveType}
+            />
           </div>
         </div>
         <AdminList

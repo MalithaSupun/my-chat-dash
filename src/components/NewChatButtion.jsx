@@ -1,115 +1,58 @@
 import React, { useState } from "react";
-import { FaPlus, FaTimes, FaPaperPlane } from "react-icons/fa";
+import { FaPlus, FaTimes } from "react-icons/fa";
 import { users } from "../constants/usersData";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-const NewChatModal = () => {
+const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isGroupMode, setIsGroupMode] = useState(false);
-  const [isContactFormVisible, setIsContactFormVisible] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [groupName, setGroupName] = useState("");
-  const [groupImage, setGroupImage] = useState(null);
-  const [isGroupFormVisible, setIsGroupFormVisible] = useState(false);
-  const [activeUserId, setActiveUserId] = useState(null); // To track the active user
-
-  const [newContact, setNewContact] = useState({
-    firstName: "",
-    lastName: "",
-    country: "",
-    mobile: "",
-  });
+  const [groupPhoto, setGroupPhoto] = useState(null);
+  const [isGroupMode, setIsGroupMode] = useState(false); // To toggle between individual and group chat modes
 
   // Toggle modal visibility
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
-    setIsGroupMode(false);
-    setSelectedUsers([]);
-    setIsGroupFormVisible(false);
-    setIsContactFormVisible(false);
-    setActiveUserId(null); // Reset active user when closing the modal
+    setIsGroupMode(false); // Reset to individual chat mode when modal is toggled
   };
 
-  // Select a user for group or make active user
+  // Handle selecting a user for a new chat
   const handleSelectUser = (userId) => {
-    if (isGroupMode) {
-      // Handle group selection logic with checkboxes
-      if (selectedUsers.includes(userId)) {
-        setSelectedUsers(selectedUsers.filter((id) => id !== userId));
-      } else {
-        setSelectedUsers([...selectedUsers, userId]);
-      }
+    setActiveId(userId); // Set the selected user as active
+    setActiveType("user");
+    toggleModal(); // Close modal after selection
+  };
+
+  // Handle selecting users for a group
+  const handleToggleUserSelect = (userId) => {
+    if (selectedUsers.includes(userId)) {
+      setSelectedUsers(selectedUsers.filter((id) => id !== userId));
     } else {
-      // If not in group mode, set the active user
-      setActiveUserId(userId);
+      setSelectedUsers([...selectedUsers, userId]);
     }
   };
 
-  // Send message to a user
-  const handleSendMessage = (user) => {
-    toast.success(`Start chat with ${user.name}`);
-  };
-
-  // Proceed to group creation
+  // Handle creating group chat
   const handleCreateGroup = () => {
-    setIsGroupFormVisible(true);
-  };
-
-  // Finalize group creation
-  const finalizeGroupCreation = () => {
-    if (groupName.trim() === "") {
-      toast.error("Please enter a group name");
+    if (groupName.trim() === "" || selectedUsers.length === 0) {
+      alert("Group name and at least one user are required!");
       return;
     }
-    const groupMembers = users.filter((user) =>
-      selectedUsers.includes(user.userId)
-    );
-    toast.success(
-      `Group "${groupName}" created with: ${groupMembers
-        .map((user) => user.name)
-        .join(", ")}`
-    );
+    // Create group logic here (use groupName, groupPhoto, selectedUsers)
+    console.log("Group Created:", { groupName, groupPhoto, selectedUsers });
+    // Reset fields after creating the group
+    setGroupName("");
+    setGroupPhoto(null);
+    setSelectedUsers([]);
     toggleModal();
   };
 
-  // Filter users based on search term
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Handle group image selection
-  const handleGroupImageChange = (e) => {
-    setGroupImage(e.target.files[0]);
-  };
-
-  // Handle contact form input changes
-  const handleContactInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewContact({ ...newContact, [name]: value });
-  };
-
-  // Add a new contact
-  const handleAddContact = () => {
-    if (
-      newContact.firstName &&
-      newContact.lastName &&
-      newContact.country &&
-      newContact.mobile
-    ) {
-      alert(
-        `New contact added: ${newContact.firstName} ${newContact.lastName}`
-      );
-      toggleModal();
-    } else {
-      toast.error("Please fill in all the fields");
-    }
-  };
-
   return (
     <>
-      {/* New chat button */}
       <button
         className="flex items-center text-gray-600 text-sm p-2 bg-gray-200 hover:bg-slate-300 rounded-full cursor-pointer mt-2"
         onClick={toggleModal}
@@ -118,144 +61,153 @@ const NewChatModal = () => {
         New Chat
       </button>
 
-      {/* Modal for New Chat */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-            {/* Modal Header */}
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-bold">
-                {isGroupMode
-                  ? isGroupFormVisible
-                    ? "Finalize Group"
-                    : "Create a New Group"
-                  : "Start a New Chat"}
+                {isGroupMode ? "Create a Group" : "Start a New Chat"}
               </h2>
               <button onClick={toggleModal} className="text-gray-600 text-xl">
                 <FaTimes />
               </button>
             </div>
 
-            {/* Search Input */}
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="Search users..."
-                className="w-full p-2 border rounded-lg"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+            <div className="flex justify-between mb-4">
+              <button
+                className={`p-2 w-1/2 ${
+                  !isGroupMode ? "bg-gray-300" : "bg-white"
+                } rounded-l-lg`}
+                onClick={() => setIsGroupMode(false)}
+              >
+                Individual Chat
+              </button>
+              <button
+                className={`p-2 w-1/2 ${
+                  isGroupMode ? "bg-gray-300" : "bg-white"
+                } rounded-r-lg`}
+                onClick={() => setIsGroupMode(true)}
+              >
+                Create Group
+              </button>
             </div>
 
-            {/* New Group Button */}
-            {!isGroupMode && (
-              <div className="flex justify-between space-x-2 mb-4">
-                <button
-                  className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                  onClick={() => {
-                    setIsGroupMode(true);
-                    setActiveUserId(null); // Reset active user when switching to group mode
-                  }}
-                >
-                  New Group
-                </button>
-              </div>
-            )}
+            {isGroupMode ? (
+              // Group chat creation section
+              <>
+                <input
+                  type="text"
+                  placeholder="Group Name"
+                  className="w-full p-2 border rounded-lg mb-4"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}
+                />
 
-            {/* User List */}
-            <div className="max-h-72 overflow-y-auto">
-              {filteredUsers.length > 0 ? (
-                filteredUsers.map((user) => (
-                  <div
-                    key={user.userId}
-                    className={`flex justify-between items-center p-2 border-b cursor-pointer hover:bg-gray-100 rounded ${
-                      !isGroupMode && activeUserId === user.userId
-                        ? "bg-blue-100"
-                        : "" // Apply background color only if not in group mode
-                    }`}
-                    onClick={() => handleSelectUser(user.userId)}
-                  >
-                    <div className="flex items-center space-x-3">
-                      {isGroupMode && (
-                        <input
-                          type="checkbox"
-                          checked={selectedUsers.includes(user.userId)}
-                          onChange={() => handleSelectUser(user.userId)}
-                          className="form-checkbox h-5 w-5 text-blue-600"
-                        />
-                      )}
-                      <img
-                        src={user.img}
-                        alt={user.name}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
-                      <div>
-                        <p className="font-medium">{user.name}</p>
-                        <p className="text-sm text-gray-500">{user.message}</p>
-                      </div>
-                    </div>
-                    {!isGroupMode && (
-                      <button
-                        onClick={() => handleSendMessage(user)}
-                        className="text-blue-500"
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) =>
+                    setGroupPhoto(URL.createObjectURL(e.target.files[0]))
+                  }
+                  className="w-full p-2 mb-4"
+                />
+
+                {groupPhoto && (
+                  <img
+                    src={groupPhoto}
+                    alt="Group"
+                    className="w-20 h-20 rounded-full mb-4"
+                  />
+                )}
+
+                <input
+                  type="text"
+                  placeholder="Search users..."
+                  className="w-full p-2 border rounded-lg mb-4"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+
+                <div className="max-h-72 overflow-y-auto">
+                  {filteredUsers.length > 0 ? (
+                    filteredUsers.map((user) => (
+                      <div
+                        key={user.userId}
+                        className="p-2 border-b cursor-pointer hover:bg-gray-100 rounded"
+                        onClick={() => handleToggleUserSelect(user.userId)}
                       >
-                        <FaPaperPlane />
-                      </button>
-                    )}
-                  </div>
-                ))
-              ) : (
-                <p>No users found.</p>
-              )}
-            </div>
+                        <div className="flex items-center space-x-3">
+                          <input
+                            type="checkbox"
+                            checked={selectedUsers.includes(user.userId)}
+                            onChange={() => handleToggleUserSelect(user.userId)}
+                          />
+                          <img
+                            src={user.img}
+                            alt={user.name}
+                            className="w-10 h-10 rounded-full"
+                          />
+                          <div>
+                            <p className="font-bold">{user.name}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No users found</p>
+                  )}
+                </div>
 
-            {/* Proceed to group creation */}
-            {isGroupMode && selectedUsers.length > 0 && !isGroupFormVisible && (
-              <div className="flex justify-end mt-4">
                 <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="bg-blue-500 text-white w-full p-2 mt-4 rounded-lg"
                   onClick={handleCreateGroup}
                 >
                   Create Group
                 </button>
-              </div>
-            )}
+              </>
+            ) : (
+              // Individual chat section
+              <>
+                <input
+                  type="text"
+                  placeholder="Search users..."
+                  className="w-full p-2 border rounded-lg mb-4"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
 
-            {/* Group Form */}
-            {isGroupFormVisible && (
-              <div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="Group Name"
-                    className="w-full p-2 border rounded-lg"
-                    value={groupName}
-                    onChange={(e) => setGroupName(e.target.value)}
-                  />
+                <div className="max-h-72 overflow-y-auto">
+                  {filteredUsers.length > 0 ? (
+                    filteredUsers.map((user) => (
+                      <div
+                        key={user.userId}
+                        className="p-2 border-b cursor-pointer hover:bg-gray-100 rounded"
+                        onClick={() => handleSelectUser(user.userId)}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <img
+                            src={user.img}
+                            alt={user.name}
+                            className="w-10 h-10 rounded-full"
+                          />
+                          
+                          <div>
+                            <p className="font-bold">{user.name}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No users found</p>
+                  )}
                 </div>
-                <div className="mb-4">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleGroupImageChange}
-                  />
-                </div>
-                <div className="flex justify-end mt-4">
-                  <button
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                    onClick={finalizeGroupCreation}
-                  >
-                    Finalize Group
-                  </button>
-                </div>
-              </div>
+              </>
             )}
           </div>
         </div>
       )}
-      <ToastContainer />
     </>
   );
 };
 
-export default NewChatModal;
+export default NewChatButton;
