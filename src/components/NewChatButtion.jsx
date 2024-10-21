@@ -76,7 +76,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
             <div className="flex justify-between mb-4">
               <button
                 className={`p-2 w-1/2 ${
-                  !isGroupMode ? "bg-gray-300" : "bg-white"
+                  !isGroupMode ? "bg-blue-400" : "bg-white"
                 } rounded-l-lg`}
                 onClick={() => setIsGroupMode(false)}
               >
@@ -84,7 +84,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
               </button>
               <button
                 className={`p-2 w-1/2 ${
-                  isGroupMode ? "bg-gray-300" : "bg-white"
+                  isGroupMode ? "bg-blue-400" : "bg-white"
                 } rounded-r-lg`}
                 onClick={() => setIsGroupMode(true)}
               >
