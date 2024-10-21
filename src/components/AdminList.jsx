@@ -10,6 +10,8 @@ const ListItem = ({ item, isActive, onClick }) => {
         return <FaCheckDouble className="text-green-500" />; // Read: green double checkmarks
       case "delivered":
         return <FaCheckDouble className="text-black" />; // Delivered but unread: black double checkmarks
+      case "unread":
+        return <FaCheckDouble className="text-black" />; // Unseen: black double checkmarks
       case "not delivered":
         return <FaCheck className="text-black" />; // Not delivered: single black checkmark
       default:
@@ -37,21 +39,24 @@ const ListItem = ({ item, isActive, onClick }) => {
           <p className="text-sm text-gray-500">{item.message}</p>
         </div>
       </div>
-      <div className="text-right">
+      <div className="flex flex-col items-end space-y-1">
         {/* Time */}
         <p className="text-sm text-gray-400">{item.time}</p>
-        {/* Render status icon based on the status */}
-        {renderStatusIcon(item.status)}
-        {/* Notification badge if unread messages */}
-        {item.notification > 0 && (
-          <span className="text-xs text-white bg-red-500 px-2 py-1 rounded-full">
-            {item.notification}
-          </span>
-        )}
+        <div className="flex items-center space-x-2">
+          {/* Render status icon based on the status */}
+          {renderStatusIcon(item.status)}
+          {/* Notification badge if unread messages */}
+          {item.notification > 0 && (
+            <span className="text-xs text-white bg-red-500 px-2 py-1 rounded-full">
+              {item.notification}
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
 };
+
 
 const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
   const handleGroupClick = (groupId) => {
