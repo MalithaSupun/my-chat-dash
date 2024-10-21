@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { users } from "../constants/usersData";
+import { FaPaperPlane } from "react-icons/fa";
 
 const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -73,10 +74,10 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
               </button>
             </div>
 
-            <div className="flex justify-between mb-4">
+            <div className="flex justify-between mb-4 ">
               <button
                 className={`p-2 w-1/2 ${
-                  !isGroupMode ? "bg-blue-400" : "bg-white"
+                  !isGroupMode ? "bg-blue-400" : "bg-slate-200"
                 } rounded-l-lg`}
                 onClick={() => setIsGroupMode(false)}
               >
@@ -84,7 +85,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
               </button>
               <button
                 className={`p-2 w-1/2 ${
-                  isGroupMode ? "bg-blue-400" : "bg-white"
+                  isGroupMode ? "bg-blue-400" : "bg-slate-200"
                 } rounded-r-lg`}
                 onClick={() => setIsGroupMode(true)}
               >
@@ -184,16 +185,19 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
                         className="p-2 border-b cursor-pointer hover:bg-gray-100 rounded"
                         onClick={() => handleSelectUser(user.userId)}
                       >
-                        <div className="flex items-center space-x-3">
-                          <img
-                            src={user.img}
-                            alt={user.name}
-                            className="w-10 h-10 rounded-full"
-                          />
-                          
-                          <div>
-                            <p className="font-bold">{user.name}</p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <img
+                              src={user.img}
+                              alt={user.name}
+                              className="w-10 h-10 rounded-full"
+                            />
+                            <div>
+                              <p className="font-bold">{user.name}</p>
+                            </div>
                           </div>
+                          {/* Icon aligned to the right */}
+                          <FaPaperPlane size={20} color="blue" />
                         </div>
                       </div>
                     ))
