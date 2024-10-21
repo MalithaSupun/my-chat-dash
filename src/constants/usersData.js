@@ -20,7 +20,7 @@ export const users = [
     time: "Today, 12.11pm",
     notification: 1,
     img: "https://randomuser.me/api/portraits/men/2.jpg",
-    status: "read",
+    status: "not delivered",
     chatData: [
       { id: 1, sender: "Chuuthiya", message: "Can we connect?", time: "Today, 12.11pm", isSender: false },
       { id: 2, sender: "You", message: "Sure! What time works for you?", time: "Today, 12.12pm", isSender: true },
@@ -33,7 +33,7 @@ export const users = [
     time: "Today, 2.40pm",
     notification: 1,
     img: "https://randomuser.me/api/portraits/men/3.jpg",
-    status: "unread",
+    status: "read",
     chatData: [
       { id: 1, sender: "Marie", message: "You have to report it...", time: "Today, 2.40pm", isSender: false },
       { id: 2, sender: "You", message: "I will submit it by EOD.", time: "Today, 2.41pm", isSender: true },
