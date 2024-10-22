@@ -77,7 +77,7 @@ const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
     }
   };
 
-  // Filter users to only include those with chat data (non-empty message)
+  // Ensure all users with chat data are included
   const usersWithChatData = users
     .filter((user) => user.chatData && user.chatData.length > 0)
     .map((user) => {
@@ -88,16 +88,14 @@ const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
       };
     });
 
-  // Filter groups to only include those with chat data (non-empty message)
-  const groupsWithChatData = groups
-    .filter((group) => group.chatData && group.chatData.length > 0)
-    .map((group) => {
-      const lastChat = group.chatData[group.chatData.length - 1]; // Get the last message in chatData
-      return {
-        ...group,
-        message: lastChat.message, // Use the last chat message
-      };
-    });
+  // Ensure all groups are included, even those without chat data
+  const groupsWithFallbackChatData = groups.map((group) => {
+    const lastChat = group.chatData?.[group.chatData.length - 1] || {}; // Fallback to an empty object if no chat data
+    return {
+      ...group,
+      message: lastChat.message || "No messages yet", // Fallback to a default message
+    };
+  });
 
   return (
     <>
@@ -105,7 +103,7 @@ const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
       <div className="bg-white p-4 rounded-lg shadow-md mb-6 border-t mt-3">
         <h2 className="text-lg font-bold pb-4">Groups</h2>
         <div>
-          {groupsWithChatData.map((group) => (
+          {groupsWithFallbackChatData.map((group) => (
             <ListItem
               key={group.groupId}
               item={group}

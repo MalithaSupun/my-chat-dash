@@ -230,11 +230,7 @@ export const groups = [
     notification: 0,
     img: "https://picsum.photos/150/150?random=6",
     chatData: [
-      { id: 1, sender: "Alice", message: "Project launch is confirmed.", time: "Monday, 10:15am", isSender: false },
-      { id: 2, sender: "Bob", message: "Great news!", time: "Monday, 10:16am", isSender: false },
-      { id: 3, sender: "You", message: "Looking forward to it!", time: "Monday, 10:17am", isSender: true },
-      { id: 4, sender: "Charlie", message: "What are the next steps?", time: "Monday, 10:18am", isSender: false },
-      { id: 5, sender: "You", message: "We need to finalize the timeline.", time: "Monday, 10:19am", isSender: true },
+
     ]
   }
 ];
