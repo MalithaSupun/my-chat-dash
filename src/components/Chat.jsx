@@ -77,6 +77,8 @@ const Chat = ({ activeId, activeType }) => {
       setProfilePic(group ? group.img : ""); // Assuming groups have an img property
       setLastSeen(""); // You can set this based on group details if needed
     }
+    // Reset newMessage when switching to a new chat
+  setNewMessage(""); 
   }, [activeId, activeType]);
 
   // Close emoji picker when clicking outside
