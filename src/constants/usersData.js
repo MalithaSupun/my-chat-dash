@@ -116,7 +116,49 @@ export const users = [
       { id: 1, sender: "Sundar Pichai", message: "Google's AI is getting smarter...", time: "Today, 8:00am", isSender: false },
       { id: 2, sender: "You", message: "Looking forward to the updates!", time: "Today, 8:01am", isSender: true },
     ]
+  },
+  {
+    userId: 10,
+    name: "Ranveer",
+    time: "Today, 8:00am",
+    notification: 0,
+    img: "https://randomuser.me/api/portraits/men/10.jpg",
+    status: "",
+    chatData: [
+    
+    ]
+  },
+  {
+    userId: 11,
+    name: "Aisha",
+    time: "Today, 7:45am",
+    notification: 0,
+    img: "https://randomuser.me/api/portraits/women/5.jpg",
+    status: "Online",
+    chatData: [
+    ]
+  },
+  {
+    userId: 12,
+    name: "David",
+    time: "Yesterday, 9:15pm",
+    notification: 0,
+    img: "https://randomuser.me/api/portraits/men/11.jpg",
+    status: "Offline",
+    chatData: [
+    ]
+  },
+  {
+    userId: 13,
+    name: "Priya",
+    time: "Today, 6:00am",
+    notification: 0,
+    img: "https://randomuser.me/api/portraits/women/12.jpg",
+    status: "Away",
+    chatData: [
+    ]
   }
+  
 ];
 
 export const groups = [

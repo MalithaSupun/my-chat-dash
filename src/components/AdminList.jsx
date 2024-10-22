@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { users, groups } from "../constants/usersData"; // Your users (Analysts) data
+import { users, groups } from "../constants/usersData"; // Your users (Analysts) and groups data
 import { FaCheck, FaCheckDouble } from "react-icons/fa"; // Single and double check icons
 
 const ListItem = ({ item, isActive, onClick }) => {
@@ -56,7 +56,6 @@ const ListItem = ({ item, isActive, onClick }) => {
   );
 };
 
-
 const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
   const handleGroupClick = (groupId) => {
     setActiveId(groupId);
@@ -78,13 +77,35 @@ const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
     }
   };
 
+  // Filter users to only include those with chat data (non-empty message)
+  const usersWithChatData = users
+    .filter((user) => user.chatData && user.chatData.length > 0)
+    .map((user) => {
+      const lastChat = user.chatData[user.chatData.length - 1]; // Get the last message in chatData
+      return {
+        ...user,
+        message: lastChat.message, // Use the last chat message
+      };
+    });
+
+  // Filter groups to only include those with chat data (non-empty message)
+  const groupsWithChatData = groups
+    .filter((group) => group.chatData && group.chatData.length > 0)
+    .map((group) => {
+      const lastChat = group.chatData[group.chatData.length - 1]; // Get the last message in chatData
+      return {
+        ...group,
+        message: lastChat.message, // Use the last chat message
+      };
+    });
+
   return (
     <>
       {/* Section for Groups */}
       <div className="bg-white p-4 rounded-lg shadow-md mb-6 border-t mt-3">
         <h2 className="text-lg font-bold pb-4">Groups</h2>
         <div>
-          {groups.map((group) => (
+          {groupsWithChatData.map((group) => (
             <ListItem
               key={group.groupId}
               item={group}
@@ -98,7 +119,7 @@ const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
       <div className="bg-white p-4 rounded-lg shadow-md border-t mt-3">
         <h2 className="text-lg font-bold pb-4">Analysts</h2>
         <div>
-          {users.map((user) => (
+          {usersWithChatData.map((user) => (
             <ListItem
               key={user.userId}
               item={user}
