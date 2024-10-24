@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { users, groups } from "../constants/usersData"; // Your users (Analysts) and groups data
 import { FaCheck, FaCheckDouble } from "react-icons/fa"; // Single and double check icons
 
 const ListItem = ({ item, isActive, onClick }) => {
@@ -56,7 +55,7 @@ const ListItem = ({ item, isActive, onClick }) => {
   );
 };
 
-const AdminList = ({ activeId, setActiveId, activeType, setActiveType }) => {
+const AdminList = ({ activeId, setActiveId, activeType, setActiveType, users, groups }) => {  // Accept users and groups as props
   const handleGroupClick = (groupId) => {
     setActiveId(groupId);
     setActiveType("group");

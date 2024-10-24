@@ -3,6 +3,7 @@ import Searchbar from "../components/Searchbar";
 import AdminList from "../components/AdminList";
 import Chat from "../components/Chat";
 import NewChatButton from "../components/NewChatButtion";
+import { users, groups } from "../constants/usersData"; // Import the data here
 
 function WrenConnect() {
   const [activeId, setActiveId] = useState(null);
@@ -21,14 +22,18 @@ function WrenConnect() {
               activeId={activeId}
               setActiveId={setActiveId}
               setActiveType={setActiveType}
+              users={users}  // Pass the users data here
             />
           </div>
         </div>
+        {/* Pass the users and groups data as props */}
         <AdminList
           activeId={activeId}
           setActiveId={setActiveId}
           activeType={activeType}
           setActiveType={setActiveType}
+          users={users}  // Pass users data
+          groups={groups}  // Pass groups data
         />
       </div>
       <div className="w-4/5 flex-1 h-full px-9 bg-white">

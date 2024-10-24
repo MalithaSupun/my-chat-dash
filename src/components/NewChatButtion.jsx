@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
-import { users } from "../constants/usersData";
 import { FaPaperPlane } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-const NewChatButton = ({ activeId, setActiveId, setActiveType }) => {
+const NewChatButton = ({ activeId, setActiveId, setActiveType, users }) => {  // Accept users as a prop
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
