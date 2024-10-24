@@ -3,11 +3,21 @@ import Searchbar from "../components/Searchbar";
 import AdminList from "../components/AdminList";
 import Chat from "../components/Chat";
 import NewChatButton from "../components/NewChatButtion";
-import { users, groups } from "../constants/usersData"; // Import the data here
+import { users as initialUsers, groups as initialGroups } from "../constants/usersData";
 
 function WrenConnect() {
   const [activeId, setActiveId] = useState(null);
-  const [activeType, setActiveType] = useState(null); // 'group' or 'user'
+  const [activeType, setActiveType] = useState(null);
+  const [users, setUsers] = useState(initialUsers);
+  const [groups, setGroups] = useState(initialGroups);
+
+  const updateChatList = (newChat) => {
+    if (newChat.type === "user") {
+      setUsers([...users, newChat.user]); // Add new user to users list
+    } else if (newChat.type === "group") {
+      setGroups([...groups, newChat.group]); // Add new group to groups list
+    }
+  };
 
   return (
     <div className="flex h-full bg-gray-50">
@@ -17,23 +27,22 @@ function WrenConnect() {
             <Searchbar />
           </div>
           <div>
-            {/* Pass activeId and setter to NewChatButton */}
             <NewChatButton 
               activeId={activeId}
               setActiveId={setActiveId}
               setActiveType={setActiveType}
-              users={users}  // Pass the users data here
+              users={users}
+              updateChatList={updateChatList}  // Pass the update function
             />
           </div>
         </div>
-        {/* Pass the users and groups data as props */}
         <AdminList
           activeId={activeId}
           setActiveId={setActiveId}
           activeType={activeType}
           setActiveType={setActiveType}
-          users={users}  // Pass users data
-          groups={groups}  // Pass groups data
+          users={users}
+          groups={groups}
         />
       </div>
       <div className="w-4/5 flex-1 h-full px-9 bg-white">
