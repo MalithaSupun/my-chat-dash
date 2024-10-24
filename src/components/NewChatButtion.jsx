@@ -78,7 +78,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType, users }) => {  //
             <div className="flex justify-between mb-4 ">
               <button
                 className={`p-2 w-1/2 ${
-                  !isGroupMode ? "bg-blue-400" : "bg-slate-200"
+                  !isGroupMode ? "bg-pink-300" : "bg-slate-200"
                 } rounded-l-lg`}
                 onClick={() => setIsGroupMode(false)}
               >
@@ -86,7 +86,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType, users }) => {  //
               </button>
               <button
                 className={`p-2 w-1/2 ${
-                  isGroupMode ? "bg-blue-400" : "bg-slate-200"
+                  isGroupMode ? "bg-pink-300" : "bg-slate-200"
                 } rounded-r-lg`}
                 onClick={() => setIsGroupMode(true)}
               >
@@ -161,7 +161,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType, users }) => {  //
                 </div>
 
                 <button
-                  className="bg-blue-500 text-white w-full p-2 mt-4 rounded-lg"
+                  className="bg-pink-400 text-white w-full p-2 mt-4 rounded-lg"
                   onClick={handleCreateGroup}
                 >
                   Create Group
@@ -198,7 +198,7 @@ const NewChatButton = ({ activeId, setActiveId, setActiveType, users }) => {  //
                             </div>
                           </div>
                           {/* Icon aligned to the right */}
-                          <FaPaperPlane size={20} color="blue" />
+                          <FaPaperPlane size={20} color="pink" />
                         </div>
                       </div>
                     ))
